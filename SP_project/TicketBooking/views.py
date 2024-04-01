@@ -196,6 +196,7 @@ def booktickets(request):
         seats = request.session['seats']
         route_id = request.session['route_id']
         route = Routes.objects.get(pk = route_id)
+        no_plate  = route.Bus.number_plate
         user = Users.objects.get(username = request.session['username'])
         From = request.session['loc_from']
         To = request.session['loc_to']
@@ -204,7 +205,7 @@ def booktickets(request):
         amount = request.session['total_amount']
         b = Bookings(route = route,user = user,From = From,To =To,departure_time = departure_time , reaching_time = reaching_time,Amount = amount)
         Bookings.save(b)
-        msg = "From: "+From+"   \nTo:"+To+" \nDeparture Time:" +departure_time+   "\nReaching Time: "+reaching_time+"\nAmount: "+str(amount)+"  \nBooking Id: "+str(b.id)+"   \nSeat No: "
+        msg = "From: "+From+"   \nTo:"+To+" \nDeparture Time:" +departure_time+   "\nReaching Time: "+reaching_time+"\nAmount: "+str(amount)+"  \nBooking Id: "+str(b.id)+"\n Number Plate : "+no_plate+"  \nSeat No: "
         for s in seats:
             str_passenger = "passenger_"+s
             str_type = "type_"+s
@@ -227,7 +228,7 @@ def booktickets(request):
         )
         return render(request,'ticket_booked.html')
     return render(request,'ticket_booked.html')
-
+        
 def cancelbooking(request):
     booking_id = request.POST['booking']
     booking = Bookings.objects.get(pk = booking_id)
