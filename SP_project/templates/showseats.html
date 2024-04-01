@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'seats.css' %}">
+    <style>
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 27%;
+            padding: 0.6%;
+            left: 36%;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+
+    <form action="{% url 'seatdetails' %}" method="post">
+        <div class="bus">
+            {% csrf_token %}
+            <li style="list-style: none;" >
+                {% for s in seats %}
+                    {% if forloop.counter0|divisibleby:columns %}
+                    <ul class="lists">
+                    {% endif %}
+                    <div style="display: inline-block;" class="seat_class">
+                        <p class="seat_numbers">
+                             {{s.seat_no}}
+                        </p>
+                        {% if s.is_Booked == True and s.type == 'woman' %}
+                        <img src="{% static 'seat_woman.png' %}" class="seats" alt="not found" id="{{s.seat_no}}" pointer-events="none" draggable="false">
+                        {% elif s.is_Booked %}
+                        <img src="{% static 'seat_booked1.png' %}" class="seats" alt="not found" id="{{s.seat_no}}" pointer-events="none" draggable="false">
+                        {% else %}
+                        <img src="{% static 'seat_not_booked1.png' %}" class="seats seats_not_booked" alt="not found" id="{{s.seat_no}}" draggable="false" onclick="select('{{s.seat_no}}');">
+                        <input type="checkbox" id="seat_{{s.seat_no}}" class = "inpseats" name="selected_seats" value="{{ s.seat_no }}">
+                        {% endif %}
+                        
+                    </div>
+                    {% if forloop.counter0|add:remaining|divisibleby:columns %}
+                    <div class="space"><p></p></div>
+                    {% endif %}
+                    {% if forloop.counter0|add:1|divisibleby:columns %}
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+            
+            </li>   
+        </div>
+            <input type="submit" value="Book" id="bookbutton">
+            </form>
+       
+        
+
+    <script>
+        var inpseats = document.getElementsByClassName('inpseats');
+        window.addEventListener('pageshow', function(event) {
+            
+            for(i=0 ; i<inpseats.length;i++){
+                inpseats[i].checked = false;
+            }
+
+        });
+        function select(id){
+            
+            let seat = document.getElementById(id);
+                if( seat.getAttribute('src') == "{% static 'seat_selected1.png' %}"){
+                    seat.src = "{% static 'seat_not_booked1.png' %}";
+                    document.getElementById('seat_'+id).checked = false;
+                }
+                else{
+                    seat.src = "{% static 'seat_selected1.png' %}";
+                    document.getElementById('seat_'+id).checked = true;
+                }
+
+        }
+    </script>
+</body>
+</html>

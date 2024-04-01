@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Information</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Seat Information</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Seat Number</th>
+                <th>Name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Booking ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in seats %}
+                <tr>
+                    <td>{{ s.seat_no }}</td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.booking.From }}</td>
+                    <td>{{ s.booking.To }}</td>
+                    <td>{{ s.booking.id }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>

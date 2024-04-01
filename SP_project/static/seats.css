@@ -1,0 +1,52 @@
+
+.seats_not_booked{
+    cursor: pointer;
+
+}
+.inpseats{
+    display: none;
+}
+.seat_numbers{
+    /* margin: 0;
+    position: relative;
+    right: -30%; */
+    position: absolute; 
+    top: 30%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 2;
+
+}
+.seats{
+    position: relative;
+    width: 100%;
+}
+.lists{
+    position: relative;
+    margin: 0px;
+    display: flex;
+}
+#bookbutton{
+    position: relative;
+    z-index: 3;
+}
+.bus{
+    position: relative;
+    width: 35%;
+    left: 33%;
+}
+.seat_class{
+    width: 15%;
+    display: flex;
+    position: relative;
+}
+.space{
+    width:12%;
+    position: relative;
+    height: auto;
+    display: flex;
+    margin: 0;
+}
+
+
+    

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <h1 class="Heading">GO-BUS.com</h1>
+    <br>
+    
+
+    {% if islogged != None %}
+    Hellow {{name}} 
+        
+        <br>
+        {% if isoperator == True %}
+        <a href="{% url 'getbus' %}"> Operate_bus</a>
+        <br>
+        {% endif %}
+        
+        
+        <a href="{% url 'findroute' %}"> Find Route</a>
+        <br>
+        <a href="{% url 'showbookings' %}">Your Bookings</a>
+        <br>
+        <a href="{% url 'logout' %}">LOGOUT</a>
+    {% endif %}
+    {% if islogged == None %}
+        Youre not Logged in
+        <br>
+        <a href="{% url 'loginpage' %}" id="loginlink">LOGIN</a>
+        <br>
+        <a href="{% url 'signuppage' %}">SIGNUP</a>
+    {% endif %}
+    
+</body>
+</html>
