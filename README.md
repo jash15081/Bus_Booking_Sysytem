@@ -63,8 +63,8 @@ Ticket prices are automatically calculated using the formula:
 1.  **Clone the Repo**
 
     ```bash
-    git clone [https://github.com/yourusername/bus-booking-django.git](https://github.com/yourusername/bus-booking-django.git)
-    cd bus-booking-django/SP_project
+    git clone https://github.com/jash15081/Bus_Booking_Sysytem.git
+    cd Bus_Booking_Sysytem/SP_project
     ```
 
 2.  **Create & Activate Virtual Environment**
